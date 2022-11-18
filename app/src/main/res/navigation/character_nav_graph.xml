@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/character_nav_graph"
+    app:startDestination="@id/characterListFragment">
+
+    <fragment
+        android:id="@+id/characterListFragment"
+        android:name="com.askat.rickandmorty.presentation.character.view.CharacterListFragment"
+        android:label="CharacterListFragment"
+        tools:layout="@layout/fragment_character_list">
+        <action
+            android:id="@+id/action_characterListFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_characterListFragment_to_filterDialog"
+            app:destination="@id/filterDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.askat.rickandmorty.presentation.character.view.CharacterDetailFragment"
+        android:label="CharacterDetailFragment"
+        tools:layout="@layout/fragment_character_detail">
+        <argument
+            android:name="characterID"
+            app:argType="integer" />
+        <action
+            android:id="@+id/actionToLocationDetail"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
+
+
+    </fragment>
+    <dialog
+        android:id="@+id/filterDialog"
+        android:name="com.askat.rickandmorty.presentation.character.view.FilterDialog"
+        android:label="FilterDialog"
+        tools:layout="@layout/dialog_filter">
+        <action
+            android:id="@+id/action_filterDialog_to_characterListFragment"
+            app:destination="@id/characterListFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/favoriteListFragment"
+        android:name="com.askat.rickandmorty.presentation.favorite.view.FavoriteListFragment"
+        android:label="FavoriteListFragment"
+        tools:layout="@layout/fragment_favorite_list">
+        <action
+            android:id="@+id/action_favoriteListFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+
+
+
+</navigation>
