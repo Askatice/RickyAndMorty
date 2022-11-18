@@ -20,7 +20,6 @@ class FavoriteViewModel @Inject constructor(
     private val _state = MutableStateFlow<FavoriteState>(FavoriteState())
     val state: StateFlow<FavoriteState> get() = _state
 
-
     init {
         viewModelScope.launch {
             try {
@@ -30,23 +29,18 @@ class FavoriteViewModel @Inject constructor(
                         isError = true
                     )
                 }
-
             } catch (e: Exception) {
                 _state.value = _state.value.copy(
                     characterList = emptyList(),
                     isError = true
                 )
             }
-
         }
-
-
     }
 
     suspend fun getFavoriteCharacters(): Flow<List<CharactersDomain>> {
         return repository.getAllFavoriteCharacters()
     }
-
     fun deleteCharacter(charactersDomain: CharactersDomain) {
         viewModelScope.launch {
             repository.deleteCharacterFromMyFavoriteList(charactersDomain)

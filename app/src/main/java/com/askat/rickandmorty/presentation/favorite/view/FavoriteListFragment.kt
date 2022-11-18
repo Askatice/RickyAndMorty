@@ -37,20 +37,14 @@ class FavoriteListFragment : Fragment() {
             val character = adapter.currentList.get(layoutPosition)
             viewModel.deleteCharacter(character)
         }
-
-
-
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentFavoriteListBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prepareAdapter()
@@ -59,19 +53,13 @@ class FavoriteListFragment : Fragment() {
                 adapter.submitList(it)
             }
         }
-
-
     }
-
     private fun prepareAdapter() {
         adapter = FavoriteCharacterAdapter()
         binding.characterList.adapter = adapter
         binding.characterList.layoutManager = LinearLayoutManager(requireContext())
-
         ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.characterList)
     }
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

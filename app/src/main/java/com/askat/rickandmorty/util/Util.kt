@@ -8,7 +8,6 @@ import androidx.paging.LoadState
 import com.airbnb.lottie.LottieAnimationView
 
 class Util {
-
     companion object {
         fun loadingState(
             state: CombinedLoadStates,

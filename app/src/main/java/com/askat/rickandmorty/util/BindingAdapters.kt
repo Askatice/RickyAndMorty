@@ -24,7 +24,6 @@ fun downloadImage(imageView: ImageView, url: String?) {
 
     }
 }
-
 @BindingAdapter("isVisible")
 fun isFilter(view: View, isFilter: Boolean) {
     view.visibility = if (isFilter) View.VISIBLE else View.GONE
@@ -47,9 +46,6 @@ fun isLoading(progressBar: ProgressBar, isLoading: Boolean) {
         progressBar.visibility = View.GONE
     }
 }
-
-
-// We determine the color according to the status of the characters.
 @BindingAdapter("statusColor")
 fun changeColor(card: CardView, status: String) {
 
@@ -61,7 +57,6 @@ fun changeColor(card: CardView, status: String) {
         card.setCardBackgroundColor(Color.GRAY)
     }
 }
-
 @BindingAdapter("statusColor")
 fun changeColor(textView: TextView, status: String) {
 

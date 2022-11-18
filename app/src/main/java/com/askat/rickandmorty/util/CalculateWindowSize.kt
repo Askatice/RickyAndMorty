@@ -19,23 +19,16 @@ class CalculateWindowSize(val activity: Activity) {
             heightDp < 900f -> WindowSizeClass.MEDIUM
             else -> WindowSizeClass.EXPANDED
         }
-
         return heightWindowClasses
-
     }
-
     fun calculateCurrentWidthSize(): WindowSizeClass {
-
         val widthDp = metrics.bounds.width() / activity.resources.displayMetrics.density
-
         val widthDpClasses = when {
             widthDp < 600f -> WindowSizeClass.COMPACT
             widthDp < 840f -> WindowSizeClass.MEDIUM
             else -> WindowSizeClass.EXPANDED
         }
-
         return widthDpClasses
     }
-
 }
 

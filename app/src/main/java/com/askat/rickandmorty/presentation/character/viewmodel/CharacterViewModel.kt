@@ -196,5 +196,4 @@ class CharacterViewModel @Inject constructor(
             else -> this.setListLayoutManager(ListType.GridLayout)
         }
     }
-
 }
