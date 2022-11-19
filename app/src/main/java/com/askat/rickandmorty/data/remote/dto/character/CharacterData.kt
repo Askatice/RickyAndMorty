@@ -20,11 +20,7 @@ data class CharacterData(
     val url: String,
     val created: String
 )
-
-
 fun Flow<PagingData<CharacterData>>.toCharactersDomain(list: List<CharactersDomain>): Flow<PagingData<CharactersDomain>> {
-
-
     return map { pagingData ->
         pagingData.map { characterData ->
             CharactersDomain(
@@ -41,8 +37,6 @@ fun Flow<PagingData<CharacterData>>.toCharactersDomain(list: List<CharactersDoma
 
     }
 }
-
-
 fun CharacterData.toCharactersDomain(): CharactersDomain {
     return CharactersDomain(
         id = id,

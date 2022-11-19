@@ -22,10 +22,8 @@ import com.askat.rickandmorty.domain.model.CharactersDomain
 import com.askat.rickandmorty.presentation.character.adapter.CharacterAdapter
 import com.askat.rickandmorty.presentation.character.viewmodel.CharacterViewModel
 import com.askat.rickandmorty.presentation.character.viewmodel.states.ListType
-import com.askat.rickandmorty.util.CalculateWindowSize
 import com.askat.rickandmorty.util.ItemLongClickListener
 import com.askat.rickandmorty.util.Util
-import com.askat.rickandmorty.util.WindowSizeClass
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -35,32 +33,23 @@ class CharacterListFragment : Fragment() {
 
     private lateinit var binding: FragmentCharacterListBinding
     lateinit var viewModel: CharacterViewModel
-    lateinit var widthWindowClass: WindowSizeClass
+
     private lateinit var characterAdapter: CharacterAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentCharacterListBinding.inflate(layoutInflater, container, false)
         viewModel = ViewModelProvider(requireActivity())[CharacterViewModel::class.java]
-
-        widthWindowClass = CalculateWindowSize(requireActivity()).calculateCurrentWidthSize()
-
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-
         prepareCharacterAdapter()
         setCharacterListLayoutManager()
-
         viewModel.checkIfTheFilterHasBeenApplied()
-
         getListData()
-
         binding.refreshBtn.setOnClickListener {
             characterAdapter.retry()
         }
-
         lifecycleScope.launch {
             characterAdapter.loadStateFlow.collect {
                 val isListEmpty =
@@ -75,18 +64,13 @@ class CharacterListFragment : Fragment() {
                 )
             }
         }
-
         binding.imgListType.apply {
             this.setOnClickListener {
                 viewModel.setLayoutManager()
-
                 setListTypeIcon(this)
                 setCharacterListLayoutManager()
             }
-
-
         }
-
         return binding.root
     }
 
@@ -101,11 +85,7 @@ class CharacterListFragment : Fragment() {
 
     private fun setCharacterListLayoutManager() {
         if (viewModel.getListType() == ListType.GridLayout) {
-
-            val spanCount = if (widthWindowClass == WindowSizeClass.EXPANDED) 3 else 2
-
-            binding.characterList.layoutManager = GridLayoutManager(requireContext(), spanCount)
-
+            binding.characterList.layoutManager = GridLayoutManager(requireContext(), 2)
             characterAdapter.setListType(ListType.GridLayout)
         } else {
             binding.characterList.layoutManager = LinearLayoutManager(requireContext())
@@ -142,16 +122,10 @@ class CharacterListFragment : Fragment() {
         val alertDialog = AlertDialog.Builder(requireContext())
             .setView(dialogView.root)
             .create()
-
-
         val isHasAddedCharacter = viewModel.isHasAddedCharacter(charactersDomain)
-
         setDialogText(isHasAddedCharacter, dialogView, charactersDomain)
-
         alertDialog.show()
-
         dialogView.btnYes.setOnClickListener {
-
             if (isHasAddedCharacter) {
                 viewModel.deleteCharacterFromMyFavoriteList(charactersDomain)
                 alertDialog.cancel()
