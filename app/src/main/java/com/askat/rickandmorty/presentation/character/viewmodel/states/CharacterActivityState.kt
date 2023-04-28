@@ -17,12 +17,8 @@ data class CharacterActivityState(
     val showToastMessageEvent: Boolean = false,
     val toastMessage: String = "",
     val listType: ListType = ListType.GridLayout
-
 )
-
 enum class ListType() {
     LinearLayout(),
     GridLayout()
 }
-
-
